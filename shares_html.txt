@@ -1,0 +1,31 @@
+               
+            <table class="m-table m-pager-table">
+                <thead>
+                <tr>
+                    <th style="width:4%">序号</th>
+                    <th style="width:6%">代码</th>
+                    <th style="width:8%">名称</th>
+                    <th style="width:6%" ><a href="javascript:void(0)" field="xj" >现价<i></i></a></th>
+                    <th style="width:8%"  class="cur"><a href="javascript:void(0)" field="zdf" order="desc"  class="desc">涨跌幅(%)<i></i></a></th>
+                    <th style="width:6%" ><a href="javascript:void(0)" field="zd" >涨跌<i></i></a></th>
+                    <th style="width:8%" ><a href="javascript:void(0)" field="zs" >涨速(%)<i></i></a></th>
+                    <th style="width:8%" ><a href="javascript:void(0)" field="hs" >换手(%)<i></i></a></th>
+                    <th style="width:6%" ><a href="javascript:void(0)" field="lb" >量比<i></i></a></th>
+                    <th style="width:6%" ><a href="javascript:void(0)" field="zf" >振幅(%)<i></i></a></th>
+                    <th style="width:7%" ><a href="javascript:void(0)" field="cje" >成交额<i></i></a></th>
+                    <th style="width:8%" ><a href="javascript:void(0)" field="ltg" >流通股<i></i></a></th>
+                    <th style="width:8%" ><a href="javascript:void(0)" field="ltsz" >流通市值<i></i></a></th>
+                    <th style="width:7%" ><a href="javascript:void(0)" field="syl" >市盈率<i></i></a></th>
+                    <!--th>概念题材</th-->
+                    <th style="width:4%">加自选</th>
+                </tr>
+                </thead>
+                <tbody>
+                                </tbody>
+            </table>
+         <input type="hidden" id="request" value='{"board":"hs","field":"zdf","order":"desc","page":"60","ajax":"1"}'>
+		 <input type="hidden" id="baseUrl" value='index/index'>
+            <div class="m-pager" id="m-page">
+             &nbsp;<a class="changePage" page="1" href="javascript:void(0);">首页</a>&nbsp;<a class="changePage" page="59" href="javascript:void(0);">上一页</a>&nbsp;&nbsp;<a class="changePage" page="56" href="javascript:void(0);">56</a>&nbsp;&nbsp;<a class="changePage" page="57" href="javascript:void(0);">57</a>&nbsp;&nbsp;<a class="changePage" page="58" href="javascript:void(0);">58</a>&nbsp;&nbsp;<a class="changePage" page="59" href="javascript:void(0);">59</a>&nbsp;<span class="page_info">60/59</span>
+            </div>
+            

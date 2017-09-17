@@ -1,0 +1,7 @@
+获取每个股票的基础数据：
+http://q.10jqka.com.cn/index/index/board/all/field/zdf/order/desc/page/1/ajax/1/
+
+
+获取每个股票的涨跌数据：
+http://d.10jqka.com.cn/v2/line/hs_000333/00/last.js
+
