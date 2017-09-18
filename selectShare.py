@@ -84,7 +84,7 @@ def price_trend_analyse(prices):
     p1 = np.poly1d(z1)
     return p1[1]
 
-def display_calc(rank, share, prices, updowns):
+def display_calc(rank, share, prices, updowns, save_folder):
     print "display--"
     x = [i for i in range(len(prices))]
     zero_y = [0 for i in range(len(prices))]
@@ -109,7 +109,7 @@ def display_calc(rank, share, prices, updowns):
     ##show
     #plt.show()
     ##savae
-    save_file = "/home/jiaqiu/makeMoney/rank/NO.%s--%s.png" % (rank, share)
+    save_file = "%s/NO.%s--%s.png" % (save_folder, rank, share)
     plt.savefig(save_file)
     plt.close()
 
@@ -131,7 +131,7 @@ def share_analyse(recommend_num):
         updown_distribution = updown_ratio_analyse(id, updowns, 5)
         prices_trend = price_trend_analyse(prices[-len(prices) / 2:])
         #buy_p = 0.1 if updowns[-1] < 0 and updowns[-2] < 0 else -0.1
-        score = (updown_distribution * 0.8 + prices_trend * 0.2) 
+        score = (updown_distribution * 1 + prices_trend * 0) 
         results.setdefault("%s@%s" % (name, id), score)
         print "%s analyse done" % name
         if num > 100000:break
@@ -143,7 +143,11 @@ def share_analyse(recommend_num):
         tag = "NO.%s " % rank
         print tag
         result.append(tag + name_id)
-        display_calc(rank, name_id, shares_infos[name_id]["prices"], shares_infos[name_id]["updowns"])
+        try:
+            display_calc(rank, name_id, shares_infos[name_id]["prices"], shares_infos[name_id]["updowns"], "rank")
+        except Exception, e:
+            print e
+            continue
         if rank >= recommend_num:break
         rank += 1
     write_result("recommend_shares.txt", result)

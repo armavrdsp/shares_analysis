@@ -52,7 +52,7 @@ pe_ratios = []
 ids_names = {}
 
 ##date to calc
-long_term = 30
+long_term = 50
 
 ##up down data
 ##updowns = [{'id':id, 'prices':[], 'updowns':[]}, ...]
@@ -69,6 +69,7 @@ def write_base_infos(file_name):
             f.write(info)
 
 def write_updown_infos(file_name):
+    print "begin to write updown infoss"
     with open(file_name, 'w') as f:
         for i in range(len(all_shares_updowns)):
             info = "%s\n" % json.dumps(all_shares_updowns[i])
@@ -121,25 +122,29 @@ def get_updown_data():
     print "begin to hanle shares up and updow"
     num = 0
     for id in ids:
-        url = url1 + str(id) + url2
-        print url
-        r = requests.get(url=url,headers=headers)
-        html = r.content
-        data = re.findall(r'"data":"(.*?)","issuePrice', html)[0].split(';')
-        prices = []
-        updowns = []
-        if len(data) < long_term + 1:continue
-        for i in range(len(data) - 1, len(data) - long_term - 2, -1):
-            date, open_price, high_price, low_price, final_price, t1, t2, t3 = data[i].split(',')
-            prices.append(float(final_price))
-        prices.reverse()
-        for i in range(1, len(prices)):
-            updowns.append((prices[i] - prices[i - 1]) / prices[i - 1])
-        prices.pop(0)
-        info = {'prices':prices, 'updowns':updowns, 'id':str(id), 'name':ids_names[id]}
-        all_shares_updowns.append(info)
-        num += 1
-        time.sleep(0.5)
+        try:
+            url = url1 + str(id) + url2
+            print url
+            r = requests.get(url=url,headers=headers)
+            html = r.content
+            data = re.findall(r'"data":"(.*?)","issuePrice', html)[0].split(';')
+            prices = []
+            updowns = []
+            if len(data) < long_term + 1:continue
+            for i in range(len(data) - 1, len(data) - long_term - 2, -1):
+                date, open_price, high_price, low_price, final_price, t1, t2, t3 = data[i].split(',')
+                prices.append(float(final_price))
+            prices.reverse()
+            for i in range(1, len(prices)):
+                updowns.append((prices[i] - prices[i - 1]) / prices[i - 1])
+            prices.pop(0)
+            info = {'prices':prices, 'updowns':updowns, 'id':str(id), 'name':ids_names[id]}
+            all_shares_updowns.append(info)
+            num += 1
+            time.sleep(0.5)
+        except Exception, e:
+            print e
+            continue;
         
 def load_base_data(filename):
     with open(filename) as f:
@@ -168,3 +173,4 @@ if __name__ == "__main__":
     load_base_data('shares_base_infos.txt')
     get_updown_data()
     write_updown_infos("shares_updowns_infos.txt")
+    print "finish!!"
